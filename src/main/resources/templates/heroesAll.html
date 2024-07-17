@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+    <title>I Require Order</title>
+
+</head>
+<body>
+<div class="center-me-div-pls">
+    <form id="delete-hero">
+        <table>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Armor Class</th>
+                <th>Health</th>
+                <th>Strength</th>
+                <th>Dexterity</th>
+                <th>Constitution</th>
+                <th>Intelligence</th>
+                <th>Wisdom</th>
+                <th>Charisma</th>
+            </tr>
+            <tr th:each="hero : ${heroes}">
+                <td>
+                    <form th:action="@{heroDeleteById}" method="post">
+                        <input type="hidden" name="id" th:value="${hero.id}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+                <td th:text="${hero.name}"></td>
+                <td th:text="${hero.armorClass}"></td>
+                <td th:text="${hero.maxHealth}"></td>
+                <td th:text="${hero.attributes.strength}"></td>
+                <td th:text="${hero.attributes.dexterity}"></td>
+                <td th:text="${hero.attributes.constitution}"></td>
+                <td th:text="${hero.attributes.intelligence}"></td>
+                <td th:text="${hero.attributes.wisdom}"></td>
+                <td th:text="${hero.attributes.charisma}"></td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <br>
+    <a href="/heroes.html" th:href="@{/heroes}">
+        <button>Back</button>
+    </a>
+
+    <a href="/home.html" th:href="@{/}">
+        <button>Back to Home</button>
+    </a>
+</div>
+</body>
+</html>

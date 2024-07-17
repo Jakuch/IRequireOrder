@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+
+    <title>I Require Order</title>
+
+</head>
+<body>
+    <div class="center-me-div-pls">
+        <p>Heroes</p>
+
+        <a href="/heroesAll.html" th:href="@{heroesAll}">
+            <button>Show all</button>
+        </a>
+
+        <a href="/heroAdd.html" th:href="@{/heroAdd}">
+            <button>Add Hero</button>
+        </a>
+
+        <p><form action="#" th:action="@{heroesDeleteAll}" method="post" ><input type="submit" value="Remove all"></form></p>
+
+        <a href="/home.html" th:href="@{/}">
+            <button>Back to Home</button>
+        </a>
+    </div>
+</body>
+</html>

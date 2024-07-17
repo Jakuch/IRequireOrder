@@ -1,0 +1,17 @@
+.center-me-div-pls {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+}
+
+table, th, td {
+  border:1px solid black;
+}
+
+table {
+    margin: auto;
+}
+
+th {
+    width:
+}

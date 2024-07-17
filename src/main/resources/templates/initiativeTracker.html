@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="/js/initiativeTracker.js" defer></script>
+
+    <title>I Require Order</title>
+
+</head>
+<body>
+<div class="center-me-div-pls">
+
+    <table id="initiativeTracker">
+        <tr>
+            <th>Hero</th>
+            <th>Initiative</th>
+            <th>AC</th>
+            <th>Current HP</th>
+            <th>Max HP</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <br>
+    <button type="button" onclick="addRow()">Add row</button>
+    <br>
+    <br>
+    <a href="/templates/home.html" th:href="@{/}">
+        <button>Back to Home</button>
+    </a>
+</div>
+</body>
+</html>
