@@ -15,7 +15,7 @@
 <div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Initiative tracker</h1></div>
 <div class="center-me-div-pls">
 
-    <table id="initiativeTracker" th:object="${tracker}">
+    <table id="initiativeTracker" th:object="${tracker}" class="table">
         <tr>
             <th>Hero</th>
             <th>Initiative</th>
@@ -37,7 +37,12 @@
     </button>
     <br>
     <br>
-    <a href="/templates/home.html" th:href="@{/}" class="btn btn-default">
+    <button type="button" onclick="saveTracker()" class="btn btn-default">
+        Save
+    </button>
+    <br>
+    <br>
+    <a href="/home.html" th:href="@{/home}" class="btn btn-default">
         Back to Home
     </a>
 </div>

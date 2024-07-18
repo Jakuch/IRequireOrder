@@ -11,36 +11,38 @@
 
 </head>
 <body>
-    <div class="center-me-div-pls">
+<div class="center-me-div-pls">
+    <br>
+    <br>
+    <p>
+    <form action="#" th:action="@{heroAdd}" th:object="${heroDto}" method="post">
+        <label for="name">Name:</label><input id="name" type="text" th:field="*{name}">
+        <label for="max-hp">Max HP:</label><input id="max-hp" type="text" th:field="*{maxHealth}">
+        <label for="current-hp">Current HP:</label><input id="current-hp" type="text" th:field="*{currentHealth}">
+        <label for="ac">AC:</label><input id="ac" type="text" th:field="*{armorClass}">
         <br>
         <br>
-        <p>
-            <form action="#" th:action="@{heroAdd}" th:object="${heroDto}" method="post">
-                <label>Name:</label><input type="text" th:field="*{name}">
-                <label>Max HP:</label><input type="text" th:field="*{maxHealth}">
-                <label>Current HP:</label><input type="text" th:field="*{currentHealth}">
-                <label>AC:</label><input type="text" th:field="*{armorClass}">
-                <br>
-                <br>
-                <label>Strength:</label><input type="text" th:field="*{strength}">
-                <label>Dexterity:</label><input type="text" th:field="*{dexterity}">
-                <label>Constitution:</label><input type="text" th:field="*{constitution}">
-                <label>Intelligence:</label><input type="text" th:field="*{intelligence}">
-                <label>Wisdom:</label><input type="text" th:field="*{wisdom}">
-                <label>Charisma:</label><input type="text" th:field="*{charisma}">
-                <br>
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-        </p>
+        <label for="strength">Strength:</label><input id="strength" type="text" th:field="*{strength}">
+        <label for="dexterity">Dexterity:</label><input id="dexterity" type="text" th:field="*{dexterity}">
+        <label for="constitution">Constitution:</label><input id="constitution" type="text" th:field="*{constitution}">
         <br>
         <br>
-        <a href="/heroes.html" th:href="@{/heroes}" class="btn btn-default">
-            Back
-        </a>
-        <a href="/home.html" th:href="@{/}" class="btn btn-default">
-            Back to Home
-        </a>
-    </div>
+        <label for="intelligence">Intelligence:</label><input id="intelligence" type="text" th:field="*{intelligence}">
+        <label for="wisdom">Wisdom:</label><input id="wisdom" type="text" th:field="*{wisdom}">
+        <label for="charisma">Charisma:</label><input id="charisma" type="text" th:field="*{charisma}">
+        <br>
+        <br>
+        <input type="submit" value="Submit" class="btn btn-default">
+    </form>
+    </p>
+    <br>
+    <br>
+    <a href="/heroes.html" th:href="@{/heroes}" class="btn btn-default">
+        Back
+    </a>
+    <a href="/home.html" th:href="@{/home}" class="btn btn-default">
+        Back to Home
+    </a>
+</div>
 </body>
 </html>

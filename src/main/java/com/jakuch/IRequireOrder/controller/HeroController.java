@@ -3,6 +3,7 @@ package com.jakuch.IRequireOrder.controller;
 import com.jakuch.IRequireOrder.model.hero.Hero;
 import com.jakuch.IRequireOrder.model.hero.dto.HeroDto;
 import com.jakuch.IRequireOrder.repository.HeroRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,19 +14,16 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class HeroController {
 
     private final HeroRepository heroRepository;
 
-    public HeroController(HeroRepository heroRepository) {
-        this.heroRepository = heroRepository;
-    }
-
     @GetMapping("/heroes")
-    public String heroes() {
+    public ModelAndView heroes() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("heroes");
-        return "heroes";
+        return modelAndView;
     }
 
     @ModelAttribute("heroes")
