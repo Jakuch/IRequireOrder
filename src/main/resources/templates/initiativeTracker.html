@@ -5,15 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="/js/initiativeTracker.js" defer></script>
 
     <title>I Require Order</title>
 
 </head>
 <body>
+<div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Initiative tracker</h1></div>
 <div class="center-me-div-pls">
 
-    <table id="initiativeTracker">
+    <table id="initiativeTracker" th:object="${tracker}">
         <tr>
             <th>Hero</th>
             <th>Initiative</th>
@@ -30,11 +32,13 @@
         </tr>
     </table>
     <br>
-    <button type="button" onclick="addRow()">Add row</button>
+    <button type="button" onclick="addRow()" class="btn btn-default">
+        Add row
+    </button>
     <br>
     <br>
-    <a href="/templates/home.html" th:href="@{/}">
-        <button>Back to Home</button>
+    <a href="/templates/home.html" th:href="@{/}" class="btn btn-default">
+        Back to Home
     </a>
 </div>
 </body>

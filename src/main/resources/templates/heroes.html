@@ -5,27 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <title>I Require Order</title>
 
 </head>
 <body>
-    <div class="center-me-div-pls">
-        <p>Heroes</p>
-
-        <a href="/heroesAll.html" th:href="@{heroesAll}">
-            <button>Show all</button>
+<div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Heroes</h1></div>
+<div class="center-me-div-pls">
+    <p>
+        <a href="/heroesAll.html" th:href="@{heroesAll}" class="btn btn-default">
+            Show all
         </a>
-
-        <a href="/heroAdd.html" th:href="@{/heroAdd}">
-            <button>Add Hero</button>
+        <a href="/heroAdd.html" th:href="@{/heroAdd}" class="btn btn-default">
+            Add Hero
         </a>
+    </p>
+    <p>
+    <form action="#" th:action="@{heroesDeleteAll}" method="post"><input type="submit" value="Remove all" class="btn btn-default"></form>
+    </p>
 
-        <p><form action="#" th:action="@{heroesDeleteAll}" method="post" ><input type="submit" value="Remove all"></form></p>
-
-        <a href="/home.html" th:href="@{/}">
-            <button>Back to Home</button>
-        </a>
-    </div>
+    <a href="/home.html" th:href="@{/}" class="btn btn-default">
+        Back to Home
+    </a>
+</div>
 </body>
 </html>

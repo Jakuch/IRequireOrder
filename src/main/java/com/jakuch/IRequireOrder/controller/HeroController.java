@@ -44,7 +44,8 @@ public class HeroController {
 
     @PostMapping("/heroAdd")
     public String addHero(@ModelAttribute("heroDto") HeroDto heroDto) {
-        return heroRepository.save(heroDto.toHero()).getId();
+        heroRepository.save(heroDto.toHero());
+        return "redirect:/heroesAll";
     }
 
     @PostMapping("/heroDeleteById")

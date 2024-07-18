@@ -5,23 +5,30 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
     <title>I Require Order</title>
 
 </head>
 <body>
+<div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Home</h1></div>
 <div class="center-me-div-pls">
-    <p>I Require Order!</p>
 
     <div>
-        <a href="/heroes.html" th:href="@{/heroes}">
-            <button>Heroes</button>
+        <a href="/heroes.html" th:href="@{/heroes}" class="btn btn-default">
+            Heroes
         </a>
     </div>
     <br>
     <div>
-        <a href="/initiativeTracker.html" th:href="@{/initiativeTracker}">
-            <button>Initiative tracker</button>
+        <a href="/initiativeTracker.html" th:href="@{/initiativeTracker}" class="btn btn-default">
+            Initiative tracker
+        </a>
+    </div>
+    <br>
+    <div>
+        <a href="/levelsTable.html" th:href="@{/levelsTable}" class="btn btn-default">
+            Levels cheat sheet
         </a>
     </div>
 </div>
