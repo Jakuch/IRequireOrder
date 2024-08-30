@@ -1,4 +1,4 @@
-package com.jakuch.IRequireOrder.repository;
+package com.jakuch.IRequireOrder.model.hero.repository;
 
 import com.jakuch.IRequireOrder.model.hero.Hero;
 import org.springframework.data.mongodb.repository.MongoRepository;

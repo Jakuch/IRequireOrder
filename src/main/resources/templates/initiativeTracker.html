@@ -6,43 +6,65 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="/js/initiativeTracker.js" defer></script>
 
     <title>I Require Order</title>
 
 </head>
 <body>
 <div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Initiative tracker</h1></div>
-<div class="center-me-div-pls">
-
-    <table id="initiativeTracker" th:object="${tracker}" class="table">
-        <tr>
-            <th>Hero</th>
-            <th>Initiative</th>
-            <th>AC</th>
-            <th>Current HP</th>
-            <th>Max HP</th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
-    <br>
-    <button type="button" onclick="addRow()" class="btn btn-default">
-        Add row
-    </button>
-    <br>
-    <br>
-    <button type="button" onclick="saveTracker()" class="btn btn-default">
-        Save
-    </button>
-    <br>
-    <br>
-    <a href="/home.html" th:href="@{/home}" class="btn btn-default">
+<div class="container center-me-div-pls">
+    <form action="#" th:action="@{/initiativeTracker}" th:object="${initiativeTracker}" method="post">
+        <table id="initTracker" class="table">
+            <thead>
+            <tr>
+                <th>Hero</th>
+                <th>Initiative</th>
+                <th>AC</th>
+                <th>Current HP</th>
+                <th>Max HP</th>
+                <th>Notes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="initiative,iter : *{initiativeList}">
+                <td><input id="hero-name" type="text" th:field="*{initiativeList[__${iter.index}__].heroName}"></td>
+                <td><input id="initiative" type="text" th:field="*{initiativeList[__${iter.index}__].value}"></td>
+                <td><input id="armor-class" type="text" th:field="*{initiativeList[__${iter.index}__].armorClass}"></td>
+                <td><input id="current-hp" type="text" th:field="*{initiativeList[__${iter.index}__].currentHp}"></td>
+                <td><input id="max-hp" type="text" th:field="*{initiativeList[__${iter.index}__].maxHp}"></td>
+                <td><textarea id="notes" rows="1" cols="30"
+                              th:field="*{initiativeList[__${iter.index}__].notes}"></textarea></td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <br>
+            <button type="submit" name="addRow" class="btn btn-default">
+                Add row
+            </button>
+            <button type="submit" name="sort" class="btn btn-default">
+                Sort
+            </button>
+            <br>
+            <div style="margin: auto; width: 30%">
+                <button type="submit" name="saveTracker" value="Submit" class="btn btn-default" style="margin-top: 10px">
+                    Save
+                </button>
+                <p class="text-wrap">If you save the initiative the ID will be shown below. Keep it to be able to reload the tracker later.</p>
+                <p th:if="${initiativeId}" th:text="${initiativeId}"></p>
+            </div>
+        </div>
+    </form>
+    <form action="#" th:action="@{/initiativeTracker}" method="post">
+        <div style="margin: auto; width: 30%">
+            <button type="submit" name="loadTracker" class="btn btn-default" style="margin-bottom: 10px">
+                Load
+            </button>
+            <br>
+            <label for="id">Id:</label><input id="id" type="text" th:name="id">
+        </div>
+    </form>
+    <a th:href="@{/home}" class="btn btn-default" style="margin-top: 10px">
         Back to Home
     </a>
 </div>

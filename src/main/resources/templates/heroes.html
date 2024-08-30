@@ -13,16 +13,47 @@
 <body>
 <div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Heroes</h1></div>
 <div class="center-me-div-pls">
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Armor Class</th>
+            <th>Health</th>
+            <th>Strength</th>
+            <th>Dexterity</th>
+            <th>Constitution</th>
+            <th>Intelligence</th>
+            <th>Wisdom</th>
+            <th>Charisma</th>
+        </tr>
+        <tr th:each="hero : ${heroes}">
+            <td>
+                <form th:action="@{heroes}" method="post">
+                    <input type="hidden" name="id" th:value="${hero.id}">
+                    <input type="submit" name="removeById" value="Remove" class="btn btn-default">
+                </form>
+            </td>
+            <td th:if="${hero.name}" th:text="${hero.name}"></td>
+            <td th:if="${hero.armorClass}" th:text="${hero.armorClass}"></td>
+            <td th:if="${hero.maxHealth}" th:text="${hero.maxHealth}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.strength}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.dexterity}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.constitution}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.intelligence}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.wisdom}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.charisma}"></td>
+        </tr>
+    </table>
+
+
     <p>
-        <a href="/heroesAll.html" th:href="@{heroesAll}" class="btn btn-default">
-            Show all
-        </a>
         <a href="/heroAdd.html" th:href="@{/heroAdd}" class="btn btn-default">
             Add Hero
         </a>
     </p>
     <p>
-    <form action="#" th:action="@{/heroesDeleteAll}" method="post"><input type="submit" value="Remove all" class="btn btn-default"></form>
+    <form action="#" th:action="@{/heroes}" method="post"><input type="submit" name="removeAll" value="Remove all"
+                                                                 class="btn btn-default"></form>
     </p>
 
     <a href="/home.html" th:href="@{/home}" class="btn btn-default">

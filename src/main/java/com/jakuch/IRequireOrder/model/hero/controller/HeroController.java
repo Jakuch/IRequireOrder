@@ -1,14 +1,11 @@
-package com.jakuch.IRequireOrder.controller;
+package com.jakuch.IRequireOrder.model.hero.controller;
 
 import com.jakuch.IRequireOrder.model.hero.Hero;
 import com.jakuch.IRequireOrder.model.hero.dto.HeroDto;
-import com.jakuch.IRequireOrder.repository.HeroRepository;
+import com.jakuch.IRequireOrder.model.hero.repository.HeroRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,17 +16,14 @@ public class HeroController {
 
     private final HeroRepository heroRepository;
 
-    @GetMapping("/heroes")
-    public ModelAndView heroes() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("heroes");
-        return modelAndView;
-    }
-
     @ModelAttribute("heroes")
-    @GetMapping("/heroesAll")
     public List<Hero> findAll() {
         return heroRepository.findAll();
+    }
+
+    @GetMapping("/heroes")
+    public String heroes() {
+        return "heroes";
     }
 
     @GetMapping("/heroAdd")
@@ -43,17 +37,18 @@ public class HeroController {
     @PostMapping("/heroAdd")
     public String addHero(@ModelAttribute("heroDto") HeroDto heroDto) {
         heroRepository.save(heroDto.toHero());
-        return "redirect:/heroesAll";
+        return "redirect:/heroes";
     }
 
-    @PostMapping("/heroDeleteById")
+    @RequestMapping(value = "/heroes", params = {"removeById"})
     public String deleteById(@RequestParam String id) {
         heroRepository.deleteById(id);
-        return "redirect:/heroesAll";
+        return "redirect:/heroes";
     }
 
-    @PostMapping("/heroesDeleteAll")
-    public void deleteAll() {
+    @RequestMapping(value = "/heroes", params = {"removeAll"})
+    public String deleteAll() {
         heroRepository.deleteAll();
+        return "redirect:/heroes";
     }
 }
