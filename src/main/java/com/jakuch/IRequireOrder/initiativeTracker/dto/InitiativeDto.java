@@ -1,6 +1,5 @@
 package com.jakuch.IRequireOrder.initiativeTracker.dto;
 
-import com.jakuch.IRequireOrder.hero.model.attributes.Attributes;
 import com.jakuch.IRequireOrder.hero.model.Hero;
 import com.jakuch.IRequireOrder.initiativeTracker.model.Initiative;
 import lombok.Getter;
@@ -32,7 +31,6 @@ public class InitiativeDto {
         hero.setArmorClass(this.getArmorClass());
         hero.setCurrentHealth(this.getCurrentHp());
         hero.setMaxHealth(this.getMaxHp());
-        hero.setAttributes(new Attributes());
         return hero;
     }
 

@@ -5,11 +5,13 @@ import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeDto;
 import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeTrackerDto;
 import com.jakuch.IRequireOrder.initiativeTracker.model.InitiativeTracker;
 import com.jakuch.IRequireOrder.initiativeTracker.repository.InitiativeTrackerRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 
 @Service
+@AllArgsConstructor
 public class InitiativeService {
 
     private InitiativeTrackerRepository initiativeTrackerRepository;

@@ -40,7 +40,7 @@ public class HeroController {
         return "redirect:/heroes";
     }
 
-    @RequestMapping(value = "/heroes", params = {"removeById"})
+    @RequestMapping(value = "/heroes", params = {"remove"})
     public String deleteById(@RequestParam String id) {
         heroService.deleteHero(id);
         return "redirect:/heroes";

@@ -30,18 +30,19 @@
             <td>
                 <form th:action="@{heroes}" method="post">
                     <input type="hidden" name="id" th:value="${hero.id}">
-                    <input type="submit" name="removeById" value="Remove" class="btn btn-default">
+                    <input type="submit" name="remove" value="Remove" class="btn btn-default">
+                    <input type="submit" name="edit" value="Edit" class="btn btn-default">
                 </form>
             </td>
-            <td th:if="${hero.name}" th:text="${hero.name}"></td>
-            <td th:if="${hero.armorClass}" th:text="${hero.armorClass}"></td>
-            <td th:if="${hero.maxHealth}" th:text="${hero.maxHealth}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.strength.value}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.dexterity.value}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.constitution.value}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.intelligence.value}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.wisdom.value}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.charisma.value}"></td>
+            <td th:text="${hero.name}"></td>
+            <td th:text="${hero.armorClass}"></td>
+            <td th:text="${hero.maxHealth}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.get(T(com.jakuch.IRequireOrder.hero.model.attributes.AttributeName).STRENGTH).getValue()}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.get(T(com.jakuch.IRequireOrder.hero.model.attributes.AttributeName).DEXTERITY).getValue()}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.get(T(com.jakuch.IRequireOrder.hero.model.attributes.AttributeName).CONSTITUTION).getValue()}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.get(T(com.jakuch.IRequireOrder.hero.model.attributes.AttributeName).INTELLIGENCE).getValue()}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.get(T(com.jakuch.IRequireOrder.hero.model.attributes.AttributeName).WISDOM).getValue()}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.get(T(com.jakuch.IRequireOrder.hero.model.attributes.AttributeName).CHARISMA).getValue()}"></td>
         </tr>
     </table>
 
