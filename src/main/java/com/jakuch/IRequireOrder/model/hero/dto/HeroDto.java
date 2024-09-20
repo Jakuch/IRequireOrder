@@ -1,7 +1,12 @@
 package com.jakuch.IRequireOrder.model.hero.dto;
 
-import com.jakuch.IRequireOrder.model.hero.Attributes;
+import com.jakuch.IRequireOrder.model.hero.Advantage;
+import com.jakuch.IRequireOrder.model.hero.InitiativeBonus;
+import com.jakuch.IRequireOrder.model.hero.attributes.Attributes;
 import com.jakuch.IRequireOrder.model.hero.Hero;
+import com.jakuch.IRequireOrder.model.hero.Level;
+import com.jakuch.IRequireOrder.model.hero.attributes.Attribute;
+import com.jakuch.IRequireOrder.model.hero.attributes.AttributeName;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,29 +23,37 @@ public class HeroDto {
     private int intelligence;
     private int wisdom;
     private int charisma;
+    private int level;
+    private int initiativeBonus;
+    private int walkingSpeed;
 
     public HeroDto() {
     }
 
     public Hero toHero() {
         var hero = new Hero();
+
+        hero.setLevel(Level.findByNumericValue(level));
+        hero.setAttributes(getAttributes());
+        hero.setCurrentExperiencePoints(hero.getLevel().getRequiredExperience());
+        hero.setInitiativeBonus(new InitiativeBonus(hero.getAttributes().getDexterity().getBonus(), Advantage.NONE));
+        hero.setWalkingSpeed(this.walkingSpeed);
         hero.setName(this.name);
         hero.setMaxHealth(this.maxHealth);
         hero.setCurrentHealth(this.currentHealth);
         hero.setArmorClass(this.armorClass);
-        hero.setAttributes(getAttributes());
 
         return hero;
     }
 
     private Attributes getAttributes() {
         var attributes = new Attributes();
-        attributes.setStrength(this.strength);
-        attributes.setDexterity(this.dexterity);
-        attributes.setConstitution(this.constitution);
-        attributes.setIntelligence(this.intelligence);
-        attributes.setWisdom(this.wisdom);
-        attributes.setCharisma(this.charisma);
+        attributes.setStrength(new Attribute(AttributeName.STRENGTH, this.strength));
+        attributes.setDexterity(new Attribute(AttributeName.DEXTERITY, this.dexterity));
+        attributes.setConstitution(new Attribute(AttributeName.CONSTITUTION, this.constitution));
+        attributes.setIntelligence(new Attribute(AttributeName.INTELLIGENCE, this.intelligence));
+        attributes.setWisdom(new Attribute(AttributeName.WISDOM, this.wisdom));
+        attributes.setCharisma(new Attribute(AttributeName.CHARISMA, this.charisma));
 
         return attributes;
     }

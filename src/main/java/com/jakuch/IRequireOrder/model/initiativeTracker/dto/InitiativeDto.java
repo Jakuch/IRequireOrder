@@ -1,6 +1,7 @@
 package com.jakuch.IRequireOrder.model.initiativeTracker.dto;
 
-import com.jakuch.IRequireOrder.model.hero.Attributes;
+import com.jakuch.IRequireOrder.model.hero.Level;
+import com.jakuch.IRequireOrder.model.hero.attributes.Attributes;
 import com.jakuch.IRequireOrder.model.hero.Hero;
 import com.jakuch.IRequireOrder.model.initiativeTracker.Initiative;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class InitiativeDto {
     }
 
     public Hero toHero() {
-        Hero hero = new Hero();
+        Hero hero = new Hero(Level.FIRST); //TODO fix it
         hero.setName(this.getHeroName());
         hero.setArmorClass(this.getArmorClass());
         hero.setCurrentHealth(this.getCurrentHp());

@@ -21,6 +21,7 @@ import java.util.Comparator;
 @AllArgsConstructor
 public class InitiativeTrackerController {
 
+    //TODO move all the logic to some kind of service same with heroes
     private InitiativeTrackerRepository initiativeTrackerRepository;
     private HeroRepository heroRepository;
 
@@ -49,7 +50,6 @@ public class InitiativeTrackerController {
 
     @RequestMapping(value = "/initiativeTracker", params = {"loadTracker"})
     public Model loadTracker(@RequestParam(value = "id") String id, Model model) throws FileNotFoundException {
-        //TODO test it and fix if needed
         var results = initiativeTrackerRepository.findById(id);
         if (results.isPresent()) {
             var initiativeTrackerDto = new InitiativeTrackerDto();
