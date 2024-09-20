@@ -28,7 +28,7 @@ public class InitiativeDto {
     }
 
     public Hero toHero() {
-        Hero hero = new Hero(Level.FIRST); //TODO fix it
+        Hero hero = new Hero();
         hero.setName(this.getHeroName());
         hero.setArmorClass(this.getArmorClass());
         hero.setCurrentHealth(this.getCurrentHp());
