@@ -1,10 +1,8 @@
 package com.jakuch.IRequireOrder.model.initiativeTracker.controller;
 
-import com.jakuch.IRequireOrder.model.hero.repository.HeroRepository;
-import com.jakuch.IRequireOrder.model.initiativeTracker.InitiativeTracker;
 import com.jakuch.IRequireOrder.model.initiativeTracker.dto.InitiativeDto;
 import com.jakuch.IRequireOrder.model.initiativeTracker.dto.InitiativeTrackerDto;
-import com.jakuch.IRequireOrder.model.initiativeTracker.repository.InitiativeTrackerRepository;
+import com.jakuch.IRequireOrder.model.initiativeTracker.service.InitiativeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +19,7 @@ import java.util.Comparator;
 @AllArgsConstructor
 public class InitiativeTrackerController {
 
-    //TODO move all the logic to some kind of service same with heroes
-    private InitiativeTrackerRepository initiativeTrackerRepository;
-    private HeroRepository heroRepository;
+    private InitiativeService initiativeService;
 
     @RequestMapping("/initiativeTracker")
     public ModelAndView get(InitiativeTrackerDto initiativeTrackerDto, ModelAndView modelAndView) {
@@ -34,39 +30,16 @@ public class InitiativeTrackerController {
 
     @RequestMapping(value = "/initiativeTracker", params = {"saveTracker"})
     public Model saveTracker(@ModelAttribute("initiativeTracker") InitiativeTrackerDto initiativeTrackerDto, Model model) {
-        var initiativeTracker = new InitiativeTracker();
-        initiativeTrackerDto.getInitiativeList()
-                .forEach(el -> {
-                    var id = heroRepository.save(el.toHero()).getId();
-                    var initiative = el.toInitiative(id);
-
-                    initiativeTracker.getInitiative().add(initiative);
-                });
-        var savedInitiativeTracker = initiativeTrackerRepository.save(initiativeTracker);
-
-        model.addAttribute("initiativeId", savedInitiativeTracker.getId());
+        var initiativeId = initiativeService.saveInitiativeTracker(initiativeTrackerDto);
+        model.addAttribute("initiativeId", initiativeId);
         return model;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"loadTracker"})
     public Model loadTracker(@RequestParam(value = "id") String id, Model model) throws FileNotFoundException {
-        var results = initiativeTrackerRepository.findById(id);
-        if (results.isPresent()) {
-            var initiativeTrackerDto = new InitiativeTrackerDto();
-            var initiativeTracker = results.get();
-            initiativeTracker.getInitiative().forEach(el ->
-            {
-                var optionalHero = heroRepository.findById(el.getHeroId());
-                if (optionalHero.isPresent()) {
-                    var initiativeDto = InitiativeDto.toDto(el, optionalHero.get());
-                    initiativeTrackerDto.getInitiativeList().add(initiativeDto);
-                }
-            });
-            model.addAttribute("initiativeTracker", initiativeTrackerDto);
-            return model;
-        } else {
-            throw new FileNotFoundException("Error there is no such tracker");
-        }
+        var initiativeTrackerDto = initiativeService.loadInitiativeTracker(id);
+        model.addAttribute("initiativeTracker", initiativeTrackerDto);
+        return model;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"addRow"})
@@ -83,9 +56,9 @@ public class InitiativeTrackerController {
         return model;
     }
 
-    @GetMapping("/removeAllInitiatives")
+    @GetMapping("/initiativeTracker/removeAll")
     public String removeAll() {
-        initiativeTrackerRepository.deleteAll();
+        initiativeService.removeAllTrackers();
         return "redirect:/home";
     }
 
