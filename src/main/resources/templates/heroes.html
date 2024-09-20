@@ -36,12 +36,12 @@
             <td th:if="${hero.name}" th:text="${hero.name}"></td>
             <td th:if="${hero.armorClass}" th:text="${hero.armorClass}"></td>
             <td th:if="${hero.maxHealth}" th:text="${hero.maxHealth}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.strength}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.dexterity}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.constitution}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.intelligence}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.wisdom}"></td>
-            <td th:if="${hero.attributes}" th:text="${hero.attributes.charisma}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.strength.value}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.dexterity.value}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.constitution.value}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.intelligence.value}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.wisdom.value}"></td>
+            <td th:if="${hero.attributes}" th:text="${hero.attributes.charisma.value}"></td>
         </tr>
     </table>
 
