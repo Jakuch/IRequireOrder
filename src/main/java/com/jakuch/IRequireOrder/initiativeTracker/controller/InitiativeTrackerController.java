@@ -1,8 +1,8 @@
 package com.jakuch.IRequireOrder.initiativeTracker.controller;
 
-import com.jakuch.IRequireOrder.initiativeTracker.service.InitiativeService;
 import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeDto;
 import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeTrackerDto;
+import com.jakuch.IRequireOrder.initiativeTracker.service.InitiativeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +51,7 @@ public class InitiativeTrackerController {
 
     @RequestMapping(value = "/initiativeTracker", params = {"sort"})
     public Model sortInitiative(InitiativeTrackerDto initiativeTrackerDto, Model model) {
-        initiativeTrackerDto.getInitiativeList().sort(Comparator.comparing(InitiativeDto::getValue).reversed());
+        initiativeTrackerDto.getInitiativeList().sort(Comparator.comparing(InitiativeDto::getValue, Comparator.nullsLast(Integer::compareTo)).reversed());
         model.addAttribute("initiativeTracker", initiativeTrackerDto);
         return model;
     }

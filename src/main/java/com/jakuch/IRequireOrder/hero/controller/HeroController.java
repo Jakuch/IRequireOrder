@@ -1,8 +1,8 @@
 package com.jakuch.IRequireOrder.hero.controller;
 
-import com.jakuch.IRequireOrder.hero.model.Hero;
 import com.jakuch.IRequireOrder.hero.dto.HeroDto;
-import com.jakuch.IRequireOrder.hero.repository.HeroRepository;
+import com.jakuch.IRequireOrder.hero.model.Hero;
+import com.jakuch.IRequireOrder.hero.service.HeroService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class HeroController {
 
-    private final HeroRepository heroRepository;
+    private HeroService heroService;
 
     @ModelAttribute("heroes")
     public List<Hero> findAll() {
-        return heroRepository.findAll();
+        return heroService.findAll();
     }
 
     @GetMapping("/heroes")
@@ -36,19 +36,19 @@ public class HeroController {
 
     @PostMapping("/heroAdd")
     public String addHero(@ModelAttribute("heroDto") HeroDto heroDto) {
-        heroRepository.save(heroDto.toHero());
+        heroService.saveHero(heroDto);
         return "redirect:/heroes";
     }
 
     @RequestMapping(value = "/heroes", params = {"removeById"})
     public String deleteById(@RequestParam String id) {
-        heroRepository.deleteById(id);
+        heroService.deleteHero(id);
         return "redirect:/heroes";
     }
 
     @RequestMapping(value = "/heroes", params = {"removeAll"})
     public String deleteAll() {
-        heroRepository.deleteAll();
+        heroService.deleteAll();
         return "redirect:/heroes";
     }
 }
