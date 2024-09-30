@@ -1,6 +1,6 @@
 package com.jakuch.IRequireOrder.initiativeTracker.service;
 
-import com.jakuch.IRequireOrder.hero.repository.HeroRepository;
+import com.jakuch.IRequireOrder.character.repository.CharacterRepository;
 import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeDto;
 import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeTrackerDto;
 import com.jakuch.IRequireOrder.initiativeTracker.model.InitiativeTracker;
@@ -15,13 +15,13 @@ import java.io.FileNotFoundException;
 public class InitiativeService {
 
     private InitiativeTrackerRepository initiativeTrackerRepository;
-    private HeroRepository heroRepository;
+    private CharacterRepository characterRepository;
 
     public String saveInitiativeTracker(InitiativeTrackerDto initiativeTrackerDto) {
         var initiativeTracker = new InitiativeTracker();
         initiativeTrackerDto.getInitiativeList()
                 .forEach(el -> {
-                    var id = heroRepository.save(el.toHero()).getId();
+                    var id = characterRepository.save(el.toCharacter()).getId();
                     var initiative = el.toInitiative(id);
 
                     initiativeTracker.getInitiative().add(initiative);
@@ -36,9 +36,9 @@ public class InitiativeService {
             var initiativeTracker = results.get();
             initiativeTracker.getInitiative().forEach(el ->
             {
-                var optionalHero = heroRepository.findById(el.getHeroId());
-                if (optionalHero.isPresent()) {
-                    var initiativeDto = InitiativeDto.toDto(el, optionalHero.get());
+                var optionalCharacter = characterRepository.findById(el.getCharacterId());
+                if (optionalCharacter.isPresent()) {
+                    var initiativeDto = InitiativeDto.toDto(el, optionalCharacter.get());
                     initiativeTrackerDto.getInitiativeList().add(initiativeDto);
                 }
             });

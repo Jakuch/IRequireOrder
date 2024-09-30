@@ -6,7 +6,7 @@ import lombok.Data;
 public class Initiative {
 
     private int value;
-    private String heroId;
+    private String characterId;
     private String notes;
     //TODO perhaps add timer for each player + movement (max+current)
 
