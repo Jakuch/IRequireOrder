@@ -22,15 +22,15 @@ public class InitiativeTrackerController {
     private InitiativeService initiativeService;
 
     @RequestMapping("/initiativeTracker")
-    public ModelAndView get(InitiativeTrackerDto initiativeTrackerDto, ModelAndView modelAndView) {
-        modelAndView.addObject("initiativeTracker", initiativeTrackerDto);
+    public ModelAndView get(InitiativeTrackerDto initiativeTracker, ModelAndView modelAndView) {
+        modelAndView.addObject("initiativeTracker", initiativeTracker);
         modelAndView.setViewName("initiativeTracker");
         return modelAndView;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"saveTracker"})
-    public Model saveTracker(@ModelAttribute("initiativeTracker") InitiativeTrackerDto initiativeTrackerDto, Model model) {
-        var initiativeId = initiativeService.saveInitiativeTracker(initiativeTrackerDto);
+    public Model saveTracker(@ModelAttribute("initiativeTracker") InitiativeTrackerDto initiativeTracker, Model model) {
+        var initiativeId = initiativeService.saveInitiativeTracker(initiativeTracker);
         model.addAttribute("initiativeId", initiativeId);
         return model;
     }
@@ -43,22 +43,29 @@ public class InitiativeTrackerController {
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"addRow"})
-    public Model addRow(InitiativeTrackerDto initiativeTrackerDto, Model model) {
-        initiativeTrackerDto.getInitiativeList().add(new InitiativeDto());
-        model.addAttribute("initiativeTracker", initiativeTrackerDto);
+    public Model addRow(InitiativeTrackerDto initiativeTracker, Model model) {
+        initiativeTracker.getInitiativeList().add(new InitiativeDto());
+        model.addAttribute("initiativeTracker", initiativeTracker);
+        return model;
+    }
+
+    @RequestMapping(value = "/initiativeTracker", params = {"removeRow"})
+    public Model removeRow(InitiativeTrackerDto initiativeTracker, Model model) {
+        initiativeTracker.getInitiativeList().remove(initiativeTracker.getInitiativeList().size() - 1);
+        model.addAttribute("initiativeTracker", initiativeTracker);
         return model;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"sort"})
-    public Model sortInitiative(InitiativeTrackerDto initiativeTrackerDto, Model model) {
-        initiativeTrackerDto.getInitiativeList().sort(Comparator.comparing(InitiativeDto::getValue, Comparator.nullsLast(Integer::compareTo)).reversed());
-        model.addAttribute("initiativeTracker", initiativeTrackerDto);
+    public Model sortInitiative(InitiativeTrackerDto initiativeTracker, Model model) {
+        initiativeTracker.getInitiativeList().sort(Comparator.comparing(InitiativeDto::getValue, Comparator.nullsLast(Integer::compareTo)).reversed());
+        model.addAttribute("initiativeTracker", initiativeTracker);
         return model;
     }
 
-    @GetMapping("/initiativeTracker/removeAll")
-    public String removeAll() {
-        initiativeService.removeAllTrackers();
+    @GetMapping("/initiativeTracker/deleteAll")
+    public String deleteAll() {
+        initiativeService.deleteAll();
         return "redirect:/home";
     }
 

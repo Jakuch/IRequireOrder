@@ -26,10 +26,14 @@ public class CharacterController {
         return "characters";
     }
 
-    @GetMapping("/characterSheet")
-    public String characterSheet() {
-        return "characterSheet";
-    } //TODO should return model with data
+    @RequestMapping(value = "/characters", params = {"characterSheet"})
+    public ModelAndView characterSheet(@RequestParam String id) {
+        var character = characterService.findById(id);
+        var modelAndView = new ModelAndView();
+        modelAndView.addObject("character", character);
+        modelAndView.setViewName("characterSheet");
+        return modelAndView;
+    }
 
     @GetMapping("/characterAdd")
     public ModelAndView addCharacterForm() {
@@ -45,20 +49,14 @@ public class CharacterController {
         return "redirect:/characters";
     }
 
-    @RequestMapping(value = "/characters", params = {"remove"})
+    @RequestMapping(value = "/characters", params = {"delete"})
     public String deleteById(@RequestParam String id) {
         characterService.deleteCharacter(id);
         return "redirect:/characters";
     }
 
-    @RequestMapping(value = "/characters", params = {"removeAll"})
-    public String deleteAll() {
-        characterService.deleteAll();
-        return "redirect:/characters";
-    }
-
     @RequestMapping(value = "/characters/deleteAll")
-    public String deleteEndpoint() {
+    public String deleteAll() {
         characterService.deleteAll();
         return "redirect:/characters";
     }

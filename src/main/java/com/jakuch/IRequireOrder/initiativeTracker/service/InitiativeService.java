@@ -48,7 +48,7 @@ public class InitiativeService {
         }
     }
 
-    public void removeAllTrackers() {
+    public void deleteAll() {
         initiativeTrackerRepository.deleteAll();
     }
 }

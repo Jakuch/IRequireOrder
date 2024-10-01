@@ -27,6 +27,10 @@ public class CharacterService {
         return characterRepository.findAll();
     }
 
+    public Character findById(String id) {
+        return characterRepository.findById(id).orElseThrow();
+    }
+
     public String saveCharacter(CharacterDto characterDto) {
         return characterRepository.save(dtoToPojo(characterDto)).getId();
     }

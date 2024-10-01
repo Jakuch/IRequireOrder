@@ -12,10 +12,9 @@
 
 </head>
 <body>
-
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mb-2">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/home.html" th:href="@{/home}">Title</a>
+        <img src="/images/d20.png" class="navbar-brand" href="/home.html" th:href="@{/home}" style="height: 50px">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -49,11 +48,11 @@
         </div>
     </div>
 </nav>
-<main class="container bg-body-tertiary p-5 rounded">
-    <div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Initiative tracker</h1></div>
-    <div class="container center-me-div-pls">
+<main class="d-flex flex-nowrap">
+    <div class="container d-flex flex-column flex-shrink-0 p-3">
+    <div style="text-align: center"><h1>Initiative tracker</h1></div>
         <form action="#" th:action="@{/initiativeTracker}" th:object="${initiativeTracker}" method="post">
-            <table id="initTracker" class="table">
+            <table id="initTracker" class="table table-hover table-striped table-dark" style="margin-bottom: auto;">
                 <thead>
                 <tr>
                     <th>Character</th>
@@ -78,33 +77,54 @@
                 </tr>
                 </tbody>
             </table>
-            <div>
-                <br>
-                <button type="submit" name="addRow" class="btn btn-primary">
-                    Add row
-                </button>
-                <button type="submit" name="sort" class="btn btn-primary">
-                    Sort
-                </button>
-                <br>
-                <div style="margin: auto; width: 30%">
-                    <button type="submit" name="saveTracker" value="Submit" class="btn btn-primary"
-                            style="margin-top: 10px">
-                        Save
-                    </button>
-                    <p class="text-wrap">If you save the initiative the ID will be shown below. Keep it to be able to
-                        reload the tracker later.</p>
-                    <p th:if="${initiativeId}" th:text="${initiativeId}"></p>
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbar2">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <button type="submit" name="addRow" class="btn btn-success me-2">
+                                    Add row
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="submit" name="removeRow" class="btn btn-success me-2">
+                                    Remove row
+                                </button>
+                            </li>
+                            <li>
+                                <button type="submit" name="sort" class="btn btn-success me-2">
+                                    Sort
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="submit" name="saveTracker" value="Submit" class="btn btn-success me-2">
+                                    Save
+                                </button>
+                            </li>
+                            <li class="nav-item">
+                                <form action="#" th:action="@{/initiativeTracker}" method="post">
+                                        <button type="submit" name="loadTracker" class="btn btn-success">
+                                            Load
+                                        </button>
+                                        <label for="id">Id:</label><input id="id" type="text" th:name="id" class="me-2">
+                                </form>
+                            </li>
+                        </ul>
+                        <div class="nav-item">
+                            <a href="javascript:history.back()" class="btn btn-success me-2">
+                                Back
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </form>
-        <form action="#" th:action="@{/initiativeTracker}" method="post">
-            <div style="margin: auto; width: 30%">
-                <button type="submit" name="loadTracker" class="btn btn-primary" style="margin-bottom: 10px">
-                    Load
-                </button>
-                <br>
-                <label for="id">Id:</label><input id="id" type="text" th:name="id">
+            </nav>
+            <div>
+                <div>
+                    <p class="text-wrap" style="font-weight: bold;">
+                        If you save the initiative the ID will be shown below. Keep it to be able to
+                        reload the tracker later.</p>
+                    <p style="font-weight: bold;" th:if="${initiativeId}" th:text="${initiativeId}"></p>
+                </div>
             </div>
         </form>
     </div>
