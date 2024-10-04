@@ -1,15 +1,17 @@
 package com.jakuch.IRequireOrder.character.model;
 
 import com.jakuch.IRequireOrder.character.model.attributes.Attribute;
-import com.jakuch.IRequireOrder.character.model.attributes.AttributeName;
 import com.jakuch.IRequireOrder.character.model.attributes.AttributesInitializer;
 import com.jakuch.IRequireOrder.character.model.savingThrows.SavingThrow;
 import com.jakuch.IRequireOrder.character.model.savingThrows.SavingThrowInitializer;
 import com.jakuch.IRequireOrder.character.model.skills.Skill;
 import com.jakuch.IRequireOrder.character.model.skills.SkillsInitializer;
+import com.jakuch.IRequireOrder.level.model.Level;
+import com.jakuch.IRequireOrder.srd.characterClass.model.CharacterClass;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,12 +25,12 @@ public class Character {
     private int armorClass;
     private int walkingSpeed;
     private InitiativeBonus initiativeBonus;
-    private Map<AttributeName, Attribute> attributes = AttributesInitializer.initializeDefaultAttributes();
+    private Map<String, Attribute> attributes = AttributesInitializer.initializeDefaultAttributes();
     private Level level;
     private int currentExperiencePoints;
     private List<Skill> skills = SkillsInitializer.initializeSkills();
     private List<SavingThrow> savingThrows = SavingThrowInitializer.initializeSavingThrows();
-    // private Class class; TODO that should be taken from sources
+    private List<CharacterClass> characterClasses = new ArrayList<>();
     // private Race race; TODO that should be taken from sources
     // private PassiveSenses passiveSenses;
 

@@ -1,4 +1,4 @@
-package com.jakuch.IRequireOrder.character.model;
+package com.jakuch.IRequireOrder.level.model;
 
 import lombok.Getter;
 

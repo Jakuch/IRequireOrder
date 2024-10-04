@@ -12,43 +12,7 @@
 
 </head>
 <body>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid">
-        <img src="/images/d20.png" class="navbar-brand" href="/home.html" th:href="@{/home}" style="height: 50px">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a href="/home.html" th:href="@{/home}" class="nav-link link-body-emphasis px-2 active"
-                       aria-current="page">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/characters.html" th:href="@{/characters}" class="nav-link link-body-emphasis px-2">Characters</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/initiativeTracker.html" th:href="@{/initiativeTracker}"
-                       class="nav-link link-body-emphasis px-2">Initiative Tracker</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/levelsTable.html" th:href="@{/levelsTable}" class="nav-link link-body-emphasis px-2">Levels
-                        cheat sheet</a>
-                </li>
-            </ul>
-            <form class="d-flex me-2 mb-2 mb-md-0" role="search">
-                <button class="btn btn-outline-light me-2" type="submit">Search</button>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
-            <div class="nav-item">
-                <button type="button" class="btn btn-outline-success me-2">Login</button>
-                <button type="button" class="btn btn-success">Sign-up</button>
-            </div>
-        </div>
-    </div>
-</nav>
+<div th:replace="templates :: navbar"></div>
 <main class="container">
     <div class="center-me-div-pls">
         <br>
@@ -59,31 +23,16 @@
             <br><br>
             <label for="level">Level:</label>
             <select id="level" type="text" th:field="*{level}">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
+                <option th:each="lvl : ${levels}"
+                        th:value="${lvl.numericValue}"
+                        th:text="${lvl.numericValue}">
+            </select>
+            <label for="class">Class:</label>
+            <select id="class" class="form-control" th:field="*{characterClassSrdKey}">
+                <option th:each="class : ${classes}" th:value="${class.srdKey}" th:text="${class.name}">
             </select>
             <label for="max-hp">Health Points:</label><input id="max-hp" type="text" th:field="*{maxHealth}">
             <label for="ac">Armor Class:</label><input id="ac" type="text" th:field="*{armorClass}">
-            <label for="initiativeBonus">Initiative bonus:</label><input id="initiativeBonus" type="text"
-                                                                         th:field="*{initiativeBonus}">
             <label for="speed">Walking speed:</label><input id="speed" type="text" th:field="*{walkingSpeed}">
             <br><br>
             <label for="strength">Strength:</label><input id="strength" type="text" th:field="*{strength}">

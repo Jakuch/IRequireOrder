@@ -1,4 +1,4 @@
-package com.jakuch.IRequireOrder;
+package com.jakuch.IRequireOrder.srd;
 
 import org.json.JSONObject;
 import org.springframework.web.client.RestTemplate;

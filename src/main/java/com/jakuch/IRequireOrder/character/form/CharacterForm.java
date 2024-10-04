@@ -1,4 +1,4 @@
-package com.jakuch.IRequireOrder.character.dto;
+package com.jakuch.IRequireOrder.character.form;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CharacterDto {
+public class CharacterForm {
     private String name;
     private int maxHealth;
     private int currentHealth;
@@ -19,6 +19,6 @@ public class CharacterDto {
     private int wisdom;
     private int charisma;
     private int level;
-    private int initiativeBonus;
     private int walkingSpeed;
+    private String characterClassSrdKey;
 }

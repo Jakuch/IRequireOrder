@@ -12,43 +12,7 @@
 
 </head>
 <body>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid">
-        <img src="/images/d20.png" class="navbar-brand" href="/home.html" th:href="@{/home}" style="height: 50px">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a href="/home.html" th:href="@{/home}" class="nav-link link-body-emphasis px-2"
-                       aria-current="page">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/characters.html" th:href="@{/characters}" class="nav-link link-body-emphasis px-2 active">Characters</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/initiativeTracker.html" th:href="@{/initiativeTracker}"
-                       class="nav-link link-body-emphasis px-2">Initiative Tracker</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/levelsTable.html" th:href="@{/levelsTable}" class="nav-link link-body-emphasis px-2">Levels
-                        cheat sheet</a>
-                </li>
-            </ul>
-            <form class="d-flex me-2 mb-2 mb-md-0" role="search">
-                <button class="btn btn-outline-light me-2" type="submit">Search</button>
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
-            <div class="nav-item">
-                <button type="button" class="btn btn-outline-success me-2">Login</button>
-                <button type="button" class="btn btn-success">Sign-up</button>
-            </div>
-        </div>
-    </div>
-</nav>
+<div th:replace="templates :: navbar"></div>
 <main class="d-flex flex-nowrap">
     <div class="container d-flex flex-column flex-shrink-0 p-3">
         <table class="table table-hover table-striped table-dark" style="margin-bottom: auto;">
@@ -75,18 +39,10 @@
                 <td th:text="${character.name}"></td>
                 <td th:text="${character.armorClass}"></td>
                 <td th:text="${character.maxHealth}"></td>
-                <td th:if="${character.attributes}"
-                    th:text="${character.attributes.get(T(com.jakuch.IRequireOrder.character.model.attributes.AttributeName).STRENGTH).getValue()}"></td>
-                <td th:if="${character.attributes}"
-                    th:text="${character.attributes.get(T(com.jakuch.IRequireOrder.character.model.attributes.AttributeName).DEXTERITY).getValue()}"></td>
-                <td th:if="${character.attributes}"
-                    th:text="${character.attributes.get(T(com.jakuch.IRequireOrder.character.model.attributes.AttributeName).CONSTITUTION).getValue()}"></td>
-                <td th:if="${character.attributes}"
-                    th:text="${character.attributes.get(T(com.jakuch.IRequireOrder.character.model.attributes.AttributeName).INTELLIGENCE).getValue()}"></td>
-                <td th:if="${character.attributes}"
-                    th:text="${character.attributes.get(T(com.jakuch.IRequireOrder.character.model.attributes.AttributeName).WISDOM).getValue()}"></td>
-                <td th:if="${character.attributes}"
-                    th:text="${character.attributes.get(T(com.jakuch.IRequireOrder.character.model.attributes.AttributeName).CHARISMA).getValue()}"></td>
+                <div th:each="attributeName : ${attributeNames}">
+                    <td th:if="${character.attributes}"
+                        th:text="${character.attributes.get(attributeName.name()).getValue()}"></td>
+                </div>
             </tr>
         </table>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">

@@ -1,7 +1,7 @@
 package com.jakuch.IRequireOrder.initiativeTracker.controller;
 
-import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeDto;
-import com.jakuch.IRequireOrder.initiativeTracker.dto.InitiativeTrackerDto;
+import com.jakuch.IRequireOrder.initiativeTracker.form.InitiativeForm;
+import com.jakuch.IRequireOrder.initiativeTracker.form.InitiativeTrackerForm;
 import com.jakuch.IRequireOrder.initiativeTracker.service.InitiativeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -22,14 +22,14 @@ public class InitiativeTrackerController {
     private InitiativeService initiativeService;
 
     @RequestMapping("/initiativeTracker")
-    public ModelAndView get(InitiativeTrackerDto initiativeTracker, ModelAndView modelAndView) {
+    public ModelAndView get(InitiativeTrackerForm initiativeTracker, ModelAndView modelAndView) {
         modelAndView.addObject("initiativeTracker", initiativeTracker);
         modelAndView.setViewName("initiativeTracker");
         return modelAndView;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"saveTracker"})
-    public Model saveTracker(@ModelAttribute("initiativeTracker") InitiativeTrackerDto initiativeTracker, Model model) {
+    public Model saveTracker(@ModelAttribute("initiativeTracker") InitiativeTrackerForm initiativeTracker, Model model) {
         var initiativeId = initiativeService.saveInitiativeTracker(initiativeTracker);
         model.addAttribute("initiativeId", initiativeId);
         return model;
@@ -37,28 +37,28 @@ public class InitiativeTrackerController {
 
     @RequestMapping(value = "/initiativeTracker", params = {"loadTracker"})
     public Model loadTracker(@RequestParam(value = "id") String id, Model model) throws FileNotFoundException {
-        var initiativeTrackerDto = initiativeService.loadInitiativeTracker(id);
-        model.addAttribute("initiativeTracker", initiativeTrackerDto);
+        var initiativeTrackerForm = initiativeService.loadInitiativeTracker(id);
+        model.addAttribute("initiativeTracker", initiativeTrackerForm);
         return model;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"addRow"})
-    public Model addRow(InitiativeTrackerDto initiativeTracker, Model model) {
-        initiativeTracker.getInitiativeList().add(new InitiativeDto());
+    public Model addRow(InitiativeTrackerForm initiativeTracker, Model model) {
+        initiativeTracker.getInitiativeList().add(new InitiativeForm());
         model.addAttribute("initiativeTracker", initiativeTracker);
         return model;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"removeRow"})
-    public Model removeRow(InitiativeTrackerDto initiativeTracker, Model model) {
+    public Model removeRow(InitiativeTrackerForm initiativeTracker, Model model) {
         initiativeTracker.getInitiativeList().remove(initiativeTracker.getInitiativeList().size() - 1);
         model.addAttribute("initiativeTracker", initiativeTracker);
         return model;
     }
 
     @RequestMapping(value = "/initiativeTracker", params = {"sort"})
-    public Model sortInitiative(InitiativeTrackerDto initiativeTracker, Model model) {
-        initiativeTracker.getInitiativeList().sort(Comparator.comparing(InitiativeDto::getValue, Comparator.nullsLast(Integer::compareTo)).reversed());
+    public Model sortInitiative(InitiativeTrackerForm initiativeTracker, Model model) {
+        initiativeTracker.getInitiativeList().sort(Comparator.comparing(InitiativeForm::getValue, Comparator.nullsLast(Integer::compareTo)).reversed());
         model.addAttribute("initiativeTracker", initiativeTracker);
         return model;
     }

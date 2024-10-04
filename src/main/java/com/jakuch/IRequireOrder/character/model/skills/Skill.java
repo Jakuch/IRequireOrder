@@ -22,6 +22,14 @@ public class Skill {
         this.value = 0;
         this.proficiency = Proficiency.NONE;
         this.advantage = Advantage.NONE;
-        this.modifier = AttributeName.valueOf(name);
+        this.modifier = AttributeName.findByName(trimNameIfNeeded(name));
+    }
+
+    private String trimNameIfNeeded(String name) {
+        int index = name.indexOf(" ");
+        if (index != -1) {
+            return name.substring(0, index);
+        }
+        return name;
     }
 }

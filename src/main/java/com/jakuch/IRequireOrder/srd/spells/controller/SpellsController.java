@@ -1,5 +1,6 @@
-package com.jakuch.IRequireOrder.spells;
+package com.jakuch.IRequireOrder.srd.spells.controller;
 
+import com.jakuch.IRequireOrder.srd.spells.service.SpellsFetcherService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

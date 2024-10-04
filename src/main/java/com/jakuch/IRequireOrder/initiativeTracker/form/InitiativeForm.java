@@ -1,4 +1,4 @@
-package com.jakuch.IRequireOrder.initiativeTracker.dto;
+package com.jakuch.IRequireOrder.initiativeTracker.form;
 
 import com.jakuch.IRequireOrder.character.model.Character;
 import com.jakuch.IRequireOrder.initiativeTracker.model.Initiative;
@@ -7,10 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class InitiativeDto {
+public class InitiativeForm {
 
     private String characterName;
-    private Integer value;
+    private int value;
     private int armorClass;
     private int currentHp;
     private int maxHp;
@@ -34,8 +34,8 @@ public class InitiativeDto {
         return character;
     }
 
-    public static InitiativeDto toDto(Initiative initiative, Character character) {
-        var initiativeDto = new InitiativeDto();
+    public static InitiativeForm toDto(Initiative initiative, Character character) {
+        var initiativeDto = new InitiativeForm();
 
         initiativeDto.setValue(initiative.getValue());
         initiativeDto.setNotes(initiative.getNotes());

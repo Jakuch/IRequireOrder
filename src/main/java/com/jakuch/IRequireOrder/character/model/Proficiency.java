@@ -1,10 +1,20 @@
 package com.jakuch.IRequireOrder.character.model;
 
+import com.jakuch.IRequireOrder.level.model.Level;
+import lombok.Getter;
+
+@Getter
 public enum Proficiency {
-    NONE,
-    HALF,
-    FULL,
-    EXPERTISE;
+    NONE(""),
+    HALF("H"),
+    FULL("P"),
+    EXPERTISE("E");
+
+    private final String shortName;
+
+    Proficiency(String shortName) {
+        this.shortName = shortName;
+    }
 
     public static int calculateProficiencyBonus(Proficiency type, Level level) {
         return switch (type) {

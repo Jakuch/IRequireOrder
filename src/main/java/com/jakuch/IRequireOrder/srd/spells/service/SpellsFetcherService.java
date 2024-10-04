@@ -1,6 +1,6 @@
-package com.jakuch.IRequireOrder.spells;
+package com.jakuch.IRequireOrder.srd.spells.service;
 
-import com.jakuch.IRequireOrder.SrdFetcherServiceBase;
+import com.jakuch.IRequireOrder.srd.SrdFetcherServiceBase;
 import org.json.JSONObject;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;

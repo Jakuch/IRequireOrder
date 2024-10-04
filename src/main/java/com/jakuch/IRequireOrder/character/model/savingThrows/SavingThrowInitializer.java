@@ -9,8 +9,9 @@ import java.util.stream.Collectors;
 public class SavingThrowInitializer {
 
     public static List<SavingThrow> initializeSavingThrows() {
-        return Arrays.stream(AttributeName.values())
-                .map(attributeName -> new SavingThrow(attributeName.name()))
+        return AttributeName.correctValues()
+                .stream()
+                .map(attributeName -> new SavingThrow(attributeName.getNormalName()+ " saving throw"))
                 .collect(Collectors.toList());
     }
 }

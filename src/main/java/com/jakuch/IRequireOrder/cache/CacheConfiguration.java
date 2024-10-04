@@ -8,7 +8,6 @@ import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,6 +21,18 @@ class CacheConfiguration {
         var cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(List.of(
                 new CaffeineCache("spells",
+                        Caffeine.newBuilder()
+                                .expireAfterWrite(60, TimeUnit.MINUTES)
+                                .maximumSize(2000)
+                                .build()
+                ),
+                new CaffeineCache("classes",
+                        Caffeine.newBuilder()
+                                .expireAfterWrite(60, TimeUnit.MINUTES)
+                                .maximumSize(2000)
+                                .build()
+                ),
+                new CaffeineCache("mappedClasses",
                         Caffeine.newBuilder()
                                 .expireAfterWrite(60, TimeUnit.MINUTES)
                                 .maximumSize(2000)
