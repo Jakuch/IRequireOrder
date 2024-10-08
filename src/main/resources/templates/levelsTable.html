@@ -12,28 +12,37 @@
 </head>
 <body>
 <div th:replace="templates :: navbar"></div>
-<main class="container bg-body-tertiary p-5 rounded">
+<main class="container">
     <div style="margin: auto; margin-top: 2%; width: 50%; text-align: center"><h1>Levels table</h1></div>
-    <div class="center-me-div-pls">
-        <table class="table table-hover table-striped table-dark">
-            <tr>
-                <th>Level</th>
-                <th>Required</th>
-                <th>Next lvl experience</th>
-                <th>Differential</th>
-                <th>Proficiency bonus</th>
-            </tr>
-            <tr th:each="lvl : ${levels}">
-                <td th:text="*{lvl.numericValue}">1</td>
-                <td th:text="*{lvl.requiredExperience}">0</td>
-                <td th:text="*{lvl.nextLevelExperience}">0</td>
-                <td th:text="*{lvl.experienceDifference}">0</td>
-                <td th:text="*{lvl.proficiencyBonus}">0</td>
-            </tr>
-        </table>
-        <br>
-
-    </div>
+    <table class="table table-hover table-striped table-dark" style="margin-bottom: auto;">
+        <tr>
+            <th>Level</th>
+            <th>Required</th>
+            <th>Next lvl experience</th>
+            <th>Differential</th>
+            <th>Proficiency bonus</th>
+        </tr>
+        <tr th:each="lvl : ${levels}">
+            <td th:text="*{lvl.numericValue}">1</td>
+            <td th:text="*{lvl.requiredExperience}">0</td>
+            <td th:text="*{lvl.nextLevelExperience}">0</td>
+            <td th:text="*{lvl.experienceDifference}">0</td>
+            <td th:text="*{lvl.proficiencyBonus}">0</td>
+        </tr>
+    </table>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark border border-4 border-dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbar2">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                </ul>
+                <div class="nav-item">
+                    <a href="javascript:history.back()" class="btn btn-success me-2">
+                        Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

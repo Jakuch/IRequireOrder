@@ -1,6 +1,5 @@
 package com.jakuch.IRequireOrder.srd;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -10,4 +9,12 @@ public abstract class SrdData {
     protected String id;
     protected String name;
     protected String srdKey;
+
+    public SrdData() {
+    }
+
+    public SrdData(String name, String srdKey) {
+        this.name = name;
+        this.srdKey = srdKey;
+    }
 }

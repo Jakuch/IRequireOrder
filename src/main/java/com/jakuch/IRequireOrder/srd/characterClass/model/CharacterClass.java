@@ -14,8 +14,7 @@ public class CharacterClass extends SrdData {
     private String subclassSrdKey;
 
     public CharacterClass(String name, String srdKey) {
-        this.name = name;
-        this.srdKey = srdKey;
+        super(name, srdKey);
         this.level = 1;
     }
 }

@@ -7,6 +7,8 @@ import com.jakuch.IRequireOrder.character.model.attributes.AttributeName;
 import com.jakuch.IRequireOrder.character.service.CharacterService;
 import com.jakuch.IRequireOrder.srd.characterClass.model.CharacterClass;
 import com.jakuch.IRequireOrder.srd.characterClass.service.CharacterClassFetcherService;
+import com.jakuch.IRequireOrder.srd.races.model.Race;
+import com.jakuch.IRequireOrder.srd.races.service.RaceFetcherService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class CharacterController {
 
     private CharacterService characterService;
     private CharacterClassFetcherService characterClassFetcherService;
+    private RaceFetcherService raceFetcherService;
 
     @ModelAttribute("characters")
     public List<Character> findAll() {
@@ -39,8 +42,11 @@ public class CharacterController {
 
     @ModelAttribute("classes")
     public List<CharacterClass> classes() {
-        return characterClassFetcherService.fetchMappedCharacterClassList();
+        return characterClassFetcherService.fetchAllMappedData();
     }
+
+    @ModelAttribute("races")
+    public List<Race> races() { return raceFetcherService.fetchAllMappedData(); }
 
     @GetMapping("/characters")
     public String characters() {

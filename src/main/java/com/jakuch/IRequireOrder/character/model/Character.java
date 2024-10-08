@@ -8,6 +8,7 @@ import com.jakuch.IRequireOrder.character.model.skills.Skill;
 import com.jakuch.IRequireOrder.character.model.skills.SkillsInitializer;
 import com.jakuch.IRequireOrder.level.model.Level;
 import com.jakuch.IRequireOrder.srd.characterClass.model.CharacterClass;
+import com.jakuch.IRequireOrder.srd.races.model.Race;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -31,7 +32,7 @@ public class Character {
     private List<Skill> skills = SkillsInitializer.initializeSkills();
     private List<SavingThrow> savingThrows = SavingThrowInitializer.initializeSavingThrows();
     private List<CharacterClass> characterClasses = new ArrayList<>();
-    // private Race race; TODO that should be taken from sources
+    private Race race;
     // private PassiveSenses passiveSenses;
 
     // private AdditionalInformation additionalInformation; TODO add here background, player, alignment, etc.

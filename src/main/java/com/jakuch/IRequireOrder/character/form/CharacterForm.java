@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CharacterForm {
+public class CharacterForm { //TODO its actually for removal Character class should be enough (so whole characterAdd revamp)
     private String name;
     private int maxHealth;
     private int currentHealth;
@@ -21,4 +21,5 @@ public class CharacterForm {
     private int level;
     private int walkingSpeed;
     private String characterClassSrdKey;
+    private String raceSrdKey;
 }

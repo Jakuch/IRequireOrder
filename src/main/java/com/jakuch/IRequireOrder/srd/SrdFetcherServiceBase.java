@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class SrdFetcherServiceBase {
+public abstract class SrdFetcherServiceBase<D extends SrdData> {
 
     protected abstract String getBaseUrl();
+
+    public abstract List<D> fetchAllMappedData();
+
+    public abstract D fetchMappedSingleRecord(String srdKey);
 
     public List<JSONObject> fetchAllData() {
         var restTemplate = new RestTemplate();
@@ -33,7 +37,7 @@ public abstract class SrdFetcherServiceBase {
 
     public JSONObject fetchSingleRecordByKey(String key) {
         var restTemplate = new RestTemplate();
-        var response = restTemplate.getForObject(getBaseUrl()+key, String.class);
+        var response = restTemplate.getForObject(getBaseUrl() + key, String.class);
 
         return new JSONObject(response);
     }

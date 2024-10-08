@@ -5,4 +5,7 @@ import lombok.Data;
 
 @Data
 public class Race extends SrdData {
+    public Race(String name, String srdKey) {
+        super(name, srdKey);
+    }
 }

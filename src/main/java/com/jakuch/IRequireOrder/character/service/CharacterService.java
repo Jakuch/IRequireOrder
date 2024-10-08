@@ -11,6 +11,7 @@ import com.jakuch.IRequireOrder.character.model.Proficiency;
 import com.jakuch.IRequireOrder.character.model.skills.Skill;
 import com.jakuch.IRequireOrder.character.repository.CharacterRepository;
 import com.jakuch.IRequireOrder.srd.characterClass.service.CharacterClassFetcherService;
+import com.jakuch.IRequireOrder.srd.races.service.RaceFetcherService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ public class CharacterService {
 
     private CharacterRepository characterRepository;
     private CharacterClassFetcherService characterClassFetcherService;
+    private RaceFetcherService raceFetcherService;
 
     public List<Character> findAll() {
         return characterRepository.findAll();
@@ -63,7 +65,9 @@ public class CharacterService {
 
         character.getSavingThrows().forEach(savingThrow -> savingThrow.setValue(calculateBonus(savingThrow, character)));
 
-        character.getCharacterClasses().add(characterClassFetcherService.fetchMappedCharacterClass(characterForm.getCharacterClassSrdKey()));
+        character.getCharacterClasses().add(characterClassFetcherService.fetchMappedSingleRecord(characterForm.getCharacterClassSrdKey()));
+
+        character.setRace(raceFetcherService.fetchMappedSingleRecord(characterForm.getRaceSrdKey()));
 
         return character;
     }
