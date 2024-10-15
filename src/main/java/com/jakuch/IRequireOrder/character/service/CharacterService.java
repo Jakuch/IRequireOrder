@@ -35,8 +35,12 @@ public class CharacterService {
         return characterRepository.findById(id).orElseThrow();
     }
 
-    public String saveCharacter(CharacterForm characterForm) {
-        return characterRepository.save(dtoToPojo(characterForm)).getId();
+    public void saveCharacter(CharacterForm characterForm) {
+        characterRepository.save(formToPojo(characterForm));
+    }
+
+    public void saveCharacter(Character character) {
+        characterRepository.save(character);
     }
 
     public void deleteCharacter(String id) {
@@ -47,7 +51,7 @@ public class CharacterService {
         characterRepository.deleteAll();
     }
 
-    private Character dtoToPojo(CharacterForm characterForm) {
+    private Character formToPojo(CharacterForm characterForm) {
         var character = new Character();
 
         character.setLevel(Level.findByNumericValue(characterForm.getLevel()));

@@ -22,8 +22,6 @@ import java.util.List;
 public class CharacterController {
 
     private CharacterService characterService;
-    private CharacterClassFetcherService characterClassFetcherService;
-    private RaceFetcherService raceFetcherService;
 
     @ModelAttribute("characters")
     public List<Character> findAll() {
@@ -34,19 +32,6 @@ public class CharacterController {
     public List<AttributeName> attributes() {
         return AttributeName.correctValues();
     }
-
-    @ModelAttribute("levels")
-    public List<Level> levels() {
-        return Arrays.asList(Level.values());
-    }
-
-    @ModelAttribute("classes")
-    public List<CharacterClass> classes() {
-        return characterClassFetcherService.fetchAllMappedData();
-    }
-
-    @ModelAttribute("races")
-    public List<Race> races() { return raceFetcherService.fetchAllMappedData(); }
 
     @GetMapping("/characters")
     public String characters() {
@@ -60,20 +45,6 @@ public class CharacterController {
         modelAndView.addObject("character", character);
         modelAndView.setViewName("characterSheet");
         return modelAndView;
-    }
-
-    @GetMapping("/characterAdd")
-    public ModelAndView addCharacterForm() {
-        var modelAndView = new ModelAndView();
-        modelAndView.addObject("character", new CharacterForm());
-        modelAndView.setViewName("characterAdd");
-        return modelAndView;
-    }
-
-    @PostMapping("/characterAdd")
-    public String addCharacter(@ModelAttribute("character") CharacterForm characterForm) {
-        characterService.saveCharacter(characterForm);
-        return "redirect:/characters";
     }
 
     @RequestMapping(value = "/characters", params = {"delete"})

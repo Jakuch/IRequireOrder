@@ -32,12 +32,6 @@ class CacheConfiguration {
                                 .maximumSize(100)
                                 .build()
                 ),
-                new CaffeineCache("mappedClasses",
-                        Caffeine.newBuilder()
-                                .expireAfterWrite(60, TimeUnit.MINUTES)
-                                .maximumSize(100)
-                                .build()
-                ),
                 new CaffeineCache("races",
                         Caffeine.newBuilder()
                                 .expireAfterWrite(60, TimeUnit.MINUTES)

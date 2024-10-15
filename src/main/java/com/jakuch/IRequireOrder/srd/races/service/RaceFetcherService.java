@@ -17,6 +17,7 @@ public class RaceFetcherService extends SrdFetcherServiceBase<Race> {
     }
 
     @Override
+    @Cacheable("races")
     public List<Race> fetchAllMappedData() {
         return fetchAllData().stream().map(jsonObject -> new Race(jsonObject.getString("name"), jsonObject.getString("key"))).collect(Collectors.toList());
     }
@@ -25,11 +26,5 @@ public class RaceFetcherService extends SrdFetcherServiceBase<Race> {
     public Race fetchMappedSingleRecord(String srdKey) {
         var jsonObject = fetchSingleRecordByKey(srdKey);
         return new Race(jsonObject.getString("name"), jsonObject.getString("key"));
-    }
-
-    @Override
-    @Cacheable("races")
-    public List<JSONObject> fetchAllData() {
-        return super.fetchAllData();
     }
 }

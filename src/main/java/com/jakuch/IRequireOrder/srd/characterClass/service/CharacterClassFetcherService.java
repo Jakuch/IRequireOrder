@@ -1,5 +1,7 @@
 package com.jakuch.IRequireOrder.srd.characterClass.service;
 
+import com.jakuch.IRequireOrder.dice.model.DiceType;
+import com.jakuch.IRequireOrder.level.model.Level;
 import com.jakuch.IRequireOrder.srd.characterClass.model.CharacterClass;
 import com.jakuch.IRequireOrder.srd.SrdFetcherServiceBase;
 import org.json.JSONObject;
@@ -17,7 +19,7 @@ public class CharacterClassFetcherService extends SrdFetcherServiceBase<Characte
     }
 
     @Override
-    @Cacheable("mappedClasses")
+    @Cacheable("classes")
     public List<CharacterClass> fetchAllMappedData() {
         return fetchAllData().stream().filter(jsonObject -> jsonObject.isNull("subclass_of")).map(jsonObject -> new CharacterClass(jsonObject.getString("name"), jsonObject.getString("key"))).collect(Collectors.toList());
     }
@@ -25,12 +27,10 @@ public class CharacterClassFetcherService extends SrdFetcherServiceBase<Characte
     @Override
     public CharacterClass fetchMappedSingleRecord(String srdKey) {
         var jsonObject = fetchSingleRecordByKey(srdKey);
-        return new CharacterClass(jsonObject.getString("name"), jsonObject.getString("key"));
-    }
+        var characterClass = new CharacterClass(jsonObject.getString("name"), jsonObject.getString("key"));
+        characterClass.setHitDice(DiceType.valueOf(jsonObject.getString("hit_dice").toUpperCase()));
+        characterClass.setLevel(Level.FIRST);
 
-    @Override
-    @Cacheable("classes")
-    public List<JSONObject> fetchAllData() {
-        return super.fetchAllData();
+        return characterClass;
     }
 }

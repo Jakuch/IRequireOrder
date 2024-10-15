@@ -1,8 +1,10 @@
 package com.jakuch.IRequireOrder.character.model.attributes;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class Attribute {
     private int value;
     private int bonus;
