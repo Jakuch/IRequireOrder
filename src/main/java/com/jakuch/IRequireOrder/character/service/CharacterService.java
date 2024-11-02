@@ -10,6 +10,7 @@ import com.jakuch.IRequireOrder.character.model.attributes.AttributeName;
 import com.jakuch.IRequireOrder.character.model.Proficiency;
 import com.jakuch.IRequireOrder.character.model.skills.Skill;
 import com.jakuch.IRequireOrder.character.repository.CharacterRepository;
+import com.jakuch.IRequireOrder.srd.characterClass.model.CharacterClass;
 import com.jakuch.IRequireOrder.srd.characterClass.service.CharacterClassFetcherService;
 import com.jakuch.IRequireOrder.srd.races.service.RaceFetcherService;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -65,11 +67,18 @@ public class CharacterService {
         character.setCurrentHealth(characterForm.getCurrentHealth());
         character.setArmorClass(characterForm.getArmorClass());
 
-        character.getSkills().forEach(skill -> skill.setValue(calculateBonus(skill, character)));
+        character.getSkills()
+                .forEach(skill -> skill.setValue(calculateBonus(skill, character)));
 
-        character.getSavingThrows().forEach(savingThrow -> savingThrow.setValue(calculateBonus(savingThrow, character)));
+        character.getSavingThrows()
+                .forEach(savingThrow -> savingThrow.setValue(calculateBonus(savingThrow, character)));
 
-        character.getCharacterClasses().add(characterClassFetcherService.fetchMappedSingleRecord(characterForm.getCharacterClassSrdKey()));
+        var classes = characterForm.getCharacterClassSrdKey()
+                .stream()
+                .map(el -> characterClassFetcherService.fetchMappedSingleRecord(el))
+                .toList();
+
+        character.getCharacterClasses().addAll(classes);
 
         character.setRace(raceFetcherService.fetchMappedSingleRecord(characterForm.getRaceSrdKey()));
 

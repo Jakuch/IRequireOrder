@@ -33,4 +33,10 @@ public class CharacterClassFetcherService extends SrdFetcherServiceBase<Characte
 
         return characterClass;
     }
+
+    @Override
+    public CharacterClass fetchFullDataOfSingleRecord(String srdKey) {
+        var jsonObject = fetchSingleRecordByKey(srdKey);
+        return null;
+    }
 }

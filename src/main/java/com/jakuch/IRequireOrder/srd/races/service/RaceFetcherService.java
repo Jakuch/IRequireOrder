@@ -27,4 +27,10 @@ public class RaceFetcherService extends SrdFetcherServiceBase<Race> {
         var jsonObject = fetchSingleRecordByKey(srdKey);
         return new Race(jsonObject.getString("name"), jsonObject.getString("key"));
     }
+
+    @Override
+    public Race fetchFullDataOfSingleRecord(String srdKey) {
+        return new Race("TODO", "BRUH_ITS_NOT_IMPLEMENTED_YET");
+    }
+
 }

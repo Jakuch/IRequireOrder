@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +23,6 @@ public class CharacterForm { //TODO its actually for removal Character class sho
     private int charisma;
     private int level;
     private int walkingSpeed;
-    private String characterClassSrdKey;
+    private List<String> characterClassSrdKey = new ArrayList<>();
     private String raceSrdKey;
 }

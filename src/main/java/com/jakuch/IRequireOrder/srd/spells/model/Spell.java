@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Spell extends SrdData {
     public Spell(String name, String srdKey) {
-        super(name, srdKey);
+        this.name = name;
+        this.srdKey = srdKey;
+
     }
 }

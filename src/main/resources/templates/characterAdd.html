@@ -14,7 +14,7 @@
 <div th:replace="~{templates :: navbar('','active','','')}"></div>
 <main class="container">
     <div style="text-align: center"><h1>Add Character</h1></div>
-    <form class="row form-control bg-dark text-light mt-2 border border-4 border-dark" action="#" th:action="@{characterAdd}" th:object="${character}" method="post">
+    <form id="addCharacterForm" class="row form-control bg-dark text-light mt-2 border border-4 border-dark" action="#" th:action="@{characterAdd}" th:object="${character}" method="post">
         <div class="col-12">
             <div class="row">
                 <div class="col-2">
@@ -27,20 +27,6 @@
                         <option th:each="lvl : ${levels}"
                                 th:value="${lvl.numericValue}"
                                 th:text="${lvl.numericValue}">
-                    </select>
-                </div>
-                <div class="col-2">
-                    <label for="race">Race:</label>
-                    <select id="race" class="form-control" th:field="*{raceSrdKey}">
-                        <option type="checkbox" th:each="race : ${races}" th:value="${race.srdKey}" th:text="${race.name}">
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <label for="class">Class:</label>
-                    <select id="class" class="form-control" th:field="*{characterClassSrdKey}">
-                        <option th:each="class : ${classes}" th:value="${class.srdKey}" th:text="${class.name}">
                     </select>
                 </div>
             </div>
@@ -85,6 +71,39 @@
                 </div>
             </div>
         </div>
+    </form>
+    <form id="addRace" class="row form-control bg-dark text-light mt-2 border border-4 border-dark" action="#" th:action="@{/characterAdd/addRace}" th:object="${chosenRace}" method="post">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2 mb-2">
+                    <label for="race">Race:</label>
+                    <select id="race" class="form-control" th:field="*{srdKey}" onchange="document.getElementById('addRace').submit()">
+                        <option value="" th:text="'Select a race'"></option>
+                        <option th:each="race : ${races}" th:value="${race.srdKey}" th:text="${race.name}">
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="addClass" class="row form-control bg-dark text-light mt-2 border border-4 border-dark" action="#" th:action="@{/characterAdd/addClass}" th:object="${chosenClass}" method="post">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2 mb-2">
+                    <label for="class">Class:</label>
+                    <select id="class" class="form-control" th:field="*{srdKey}" onchange="document.getElementById('addClass').submit()">
+                        <option value="" th:text="'Select a class'"></option>
+                        <option th:each="class : ${classes}" th:value="${class.srdKey}" th:text="${class.name}">
+                    </select>
+                </div>
+                <div class="col-10" th:object="${character}">
+                    <div th:each="classSrd : *{characterClassSrdKey}">
+                        <div th:text="${classSrd}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form id="submitForm" class="row form-control bg-dark text-light mt-2 border border-4 border-dark" action="#" th:action="@{/characterAdd/submitForm}" method="post">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mt-2">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbar2">

@@ -15,6 +15,8 @@ public abstract class SrdFetcherServiceBase<D extends SrdData> {
 
     public abstract D fetchMappedSingleRecord(String srdKey);
 
+    public abstract D fetchFullDataOfSingleRecord(String srdKey);
+
     public List<JSONObject> fetchAllData() {
         var restTemplate = new RestTemplate();
         var nextPage = getBaseUrl();

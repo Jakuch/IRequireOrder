@@ -6,10 +6,7 @@ import com.jakuch.IRequireOrder.initiativeTracker.service.InitiativeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.FileNotFoundException;
@@ -21,7 +18,7 @@ public class InitiativeTrackerController {
 
     private InitiativeService initiativeService;
 
-    @RequestMapping("/initiativeTracker")
+    @GetMapping("/initiativeTracker")
     public ModelAndView get(InitiativeTrackerForm initiativeTracker, ModelAndView modelAndView) {
         modelAndView.addObject("initiativeTracker", initiativeTracker);
         modelAndView.setViewName("initiativeTracker");
@@ -66,7 +63,7 @@ public class InitiativeTrackerController {
     @GetMapping("/initiativeTracker/deleteAll")
     public String deleteAll() {
         initiativeService.deleteAll();
-        return "redirect:/home";
+        return "redirect:/initiativeTracker";
     }
 
 }

@@ -18,6 +18,7 @@ public class SpellsFetcherService extends SrdFetcherServiceBase<Spell> {
     }
 
     @Override
+    @Cacheable("spells")
     public List<Spell> fetchAllMappedData() {
         return fetchAllData().stream().map(jsonObject -> new Spell(jsonObject.getString("name"), jsonObject.getString("key"))).collect(Collectors.toList());
     }
@@ -29,8 +30,7 @@ public class SpellsFetcherService extends SrdFetcherServiceBase<Spell> {
     }
 
     @Override
-    @Cacheable("spells")
-    public List<JSONObject> fetchAllData() {
-        return super.fetchAllData();
+    public Spell fetchFullDataOfSingleRecord(String srdKey) {
+        return null;
     }
 }

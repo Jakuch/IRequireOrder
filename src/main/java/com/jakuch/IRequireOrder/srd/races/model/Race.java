@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Race extends SrdData {
     public Race(String name, String srdKey) {
-        super(name, srdKey);
+        this.name = name;
+        this.srdKey = srdKey;
     }
 }
